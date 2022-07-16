@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title_block %}
+تراکنش
+{% endblock %}
+
+
+{% block body_block %}
+
+{% include 'navbar.html' %}
+
+{% block content %}
+<div class="container my-5">
+
+    <div class="row">
+        <div class="p-5 m-auto rounded shadow-lg col-md-4 bg-body">
+            <h3 class="text-center text-success">{{user}} </h3>
+            <form method="POST" class="my-5">
+        {% csrf_token %}
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+                قیمت
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="amount" id="amount" type="number" required placeholder="Amount">
+        </div>
+        {% if form.amount.errors %}
+            {% for error in form.amount.errors %}
+                <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        <button type="submit" class="mb-4 btn btn-primary btn-block">ثبت</button>
+    </form>
+</div>
+{% endblock %}
+
+{% endblock %}
